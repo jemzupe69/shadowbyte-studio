@@ -4,96 +4,353 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>ShadowByte Studio</title>
+<meta name="theme-color" content="#08080d">
+<title>ShedowBot | ShadowByte Studio</title>
 
 <style>
 * {
     box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+
+:root {
+    --purple: #a66cff;
+    --purple-light: #c5a1ff;
+    --background: #08080d;
+    --panel: #111119;
+}
+
+html {
+    scroll-behavior: smooth;
 }
 
 body {
-    margin: 0;
-    background: #08080d;
-    color: #fff;
+    background: var(--background);
+    color: white;
     font-family: Arial, sans-serif;
+    overflow-x: hidden;
 }
 
+body.loading {
+    overflow: hidden;
+}
+
+/* INTRO */
+
+.intro {
+    position: fixed;
+    inset: 0;
+    z-index: 1000;
+    background: #08080d;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    transition: opacity .8s ease, visibility .8s ease;
+}
+
+.intro.hide {
+    opacity: 0;
+    visibility: hidden;
+}
+
+.intro-logo {
+    color: var(--purple-light);
+    font-size: 35px;
+    font-weight: bold;
+    letter-spacing: 5px;
+    animation: introPulse 1.2s infinite alternate;
+}
+
+.loader {
+    width: 150px;
+    height: 3px;
+    background: #24202f;
+    margin-top: 25px;
+    overflow: hidden;
+    border-radius: 10px;
+}
+
+.loader::after {
+    content: "";
+    display: block;
+    width: 45%;
+    height: 100%;
+    background: var(--purple);
+    animation: loading 1.3s ease-in-out infinite;
+}
+
+@keyframes loading {
+    from { transform: translateX(-100%); }
+    to { transform: translateX(330%); }
+}
+
+@keyframes introPulse {
+    from { opacity: .55; }
+    to { opacity: 1; text-shadow: 0 0 25px #a66cff; }
+}
+
+/* BACKGROUND */
+
+.background-glow {
+    position: fixed;
+    width: 550px;
+    height: 550px;
+    background: #6426ad;
+    filter: blur(180px);
+    opacity: .12;
+    border-radius: 50%;
+    top: 10%;
+    left: 50%;
+    transform: translateX(-50%);
+    pointer-events: none;
+    z-index: -1;
+    animation: glowMove 10s ease-in-out infinite alternate;
+}
+
+@keyframes glowMove {
+    from { transform: translate(-60%, -20px); }
+    to { transform: translate(-35%, 100px); }
+}
+
+#particles {
+    position: fixed;
+    inset: 0;
+    pointer-events: none;
+    z-index: -1;
+    overflow: hidden;
+}
+
+.particle {
+    position: absolute;
+    width: 3px;
+    height: 3px;
+    border-radius: 50%;
+    background: #b68aff;
+    opacity: .5;
+    animation: floatParticle linear infinite;
+}
+
+@keyframes floatParticle {
+    from { transform: translateY(110vh); opacity: 0; }
+    15% { opacity: .5; }
+    85% { opacity: .5; }
+    to { transform: translateY(-10vh); opacity: 0; }
+}
+
+/* CURSOR LIGHT */
+
+.cursor-light {
+    position: fixed;
+    width: 260px;
+    height: 260px;
+    border-radius: 50%;
+    background: radial-gradient(circle, rgba(130,65,210,.10), transparent 70%);
+    pointer-events: none;
+    transform: translate(-50%, -50%);
+    z-index: 0;
+}
+
+/* HEADER */
+
 header {
+    position: relative;
+    z-index: 10;
     padding: 25px;
     text-align: center;
     border-bottom: 1px solid #24202f;
+    background: rgba(8,8,13,.8);
+    backdrop-filter: blur(12px);
+    animation: slideDown .9s ease both;
 }
 
 .logo {
-    color: #a66cff;
-    font-size: 27px;
+    color: var(--purple-light);
+    font-size: 25px;
     font-weight: bold;
-    letter-spacing: 3px;
+    letter-spacing: 4px;
 }
+
+.logo span {
+    color: white;
+}
+
+/* MAIN */
 
 main {
-    max-width: 1000px;
-    margin: 65px auto;
-    padding: 25px;
+    max-width: 1050px;
+    margin: 0 auto;
+    padding: 75px 25px;
     text-align: center;
+    position: relative;
+    z-index: 1;
 }
 
-h1 {
-    font-size: 42px;
+.hero-title {
+    font-size: clamp(35px, 6vw, 60px);
+    margin-bottom: 20px;
+    animation: fadeUp 1s .3s both;
 }
 
-h1 span {
-    color: #a66cff;
+.hero-title span {
+    color: var(--purple-light);
+    text-shadow: 0 0 25px rgba(166,108,255,.35);
 }
 
 .description {
     color: #aaa;
-    line-height: 1.7;
+    line-height: 1.8;
 }
+
+.hero-description {
+    max-width: 650px;
+    margin: auto;
+    animation: fadeUp 1s .5s both;
+}
+
+/* BOT SECTION */
 
 .bot-section {
-    margin-top: 65px;
-    padding: 35px 25px;
-    background: #111119;
+    margin-top: 75px;
+    padding: 45px 25px;
+    background: rgba(17,17,25,.88);
     border: 1px solid #302442;
-    border-radius: 18px;
+    border-radius: 20px;
+    position: relative;
+    overflow: hidden;
+    box-shadow: 0 0 45px rgba(100,38,173,.08);
+    animation: fadeUp 1s .7s both;
 }
 
-.bot-image {
-    width: 100%;
-    max-width: 650px;
-    height: 280px;
-    margin: 0 auto 30px;
-    border-radius: 14px;
-    background:
-        radial-gradient(ellipse at center, #39205f 0%, #171020 45%, #0b0b11 100%);
+.bot-section::before {
+    content: "";
+    position: absolute;
+    width: 300px;
+    height: 300px;
+    background: #783ac0;
+    filter: blur(130px);
+    opacity: .12;
+    top: -150px;
+    left: 50%;
+    transform: translateX(-50%);
+}
+
+/* ROBOT ART */
+
+.robot-art {
+    width: 230px;
+    height: 230px;
+    margin: 0 auto 35px;
+    position: relative;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    animation: robotFloat 4s ease-in-out infinite;
+}
+
+.robot-orbit {
+    position: absolute;
+    width: 215px;
+    height: 215px;
+    border: 1px solid rgba(182,138,255,.4);
+    border-radius: 50%;
+    animation: rotate 12s linear infinite;
+}
+
+.robot-orbit::before {
+    content: "";
+    position: absolute;
+    top: 15px;
+    left: 30px;
+    width: 9px;
+    height: 9px;
+    background: #c5a1ff;
+    border-radius: 50%;
+    box-shadow: 0 0 15px #a66cff;
+}
+
+.robot-core {
+    width: 135px;
+    height: 135px;
+    border-radius: 35px;
+    background: linear-gradient(145deg, #35204f, #130e20);
+    border: 2px solid #9860d8;
+    box-shadow: 0 0 45px rgba(166,108,255,.35), inset 0 0 25px rgba(166,108,255,.15);
     display: flex;
     align-items: center;
     justify-content: center;
-    overflow: hidden;
+    position: relative;
 }
 
-.bot-image img {
-    width: 100%;
-    height: 100%;
-    object-fit: cover;
+.robot-face {
+    width: 85px;
+    height: 65px;
+    background: #090810;
+    border: 2px solid #68439b;
+    border-radius: 20px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 17px;
 }
 
-.bot-image span {
-    color: #b68aff;
-    font-size: 35px;
-    font-weight: bold;
-    letter-spacing: 3px;
+.robot-eye {
+    width: 13px;
+    height: 20px;
+    border-radius: 10px;
+    background: #c5a1ff;
+    box-shadow: 0 0 15px #a66cff;
+    animation: blink 4s infinite;
 }
+
+.robot-antenna {
+    position: absolute;
+    top: -19px;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 3px;
+    height: 20px;
+    background: #a66cff;
+}
+
+.robot-antenna::after {
+    content: "";
+    position: absolute;
+    width: 10px;
+    height: 10px;
+    top: -7px;
+    left: -4px;
+    background: #c5a1ff;
+    border-radius: 50%;
+    box-shadow: 0 0 15px #a66cff;
+}
+
+@keyframes robotFloat {
+    0%, 100% { transform: translateY(0); }
+    50% { transform: translateY(-13px); }
+}
+
+@keyframes rotate {
+    to { transform: rotate(360deg); }
+}
+
+@keyframes blink {
+    0%, 45%, 49%, 100% { transform: scaleY(1); }
+    47% { transform: scaleY(.1); }
+}
+
+/* TEXT */
 
 .bot-section h2 {
-    color: #b68aff;
-    font-size: 30px;
+    color: var(--purple-light);
+    font-size: 32px;
+    margin-bottom: 15px;
 }
 
 .bot-description {
     max-width: 650px;
-    margin: 15px auto;
+    margin: auto;
     color: #aaa;
     line-height: 1.8;
 }
@@ -109,141 +366,259 @@ h1 span {
 .feature {
     background: #1b1725;
     border: 1px solid #38284e;
-    padding: 12px 18px;
-    border-radius: 8px;
+    padding: 13px 19px;
+    border-radius: 9px;
     color: #d5c2f5;
+    transition: .3s;
 }
+
+.feature:hover {
+    transform: translateY(-5px);
+    border-color: var(--purple);
+    box-shadow: 0 5px 25px rgba(166,108,255,.2);
+}
+
+/* BUTTONS */
 
 .invite-button {
     display: inline-block;
     margin-top: 15px;
-    padding: 16px 32px;
-    border-radius: 9px;
-    background: #7540c9;
+    padding: 17px 35px;
+    border-radius: 10px;
+    background: linear-gradient(110deg, #7540c9, #925cff);
     color: white;
     font-weight: bold;
     text-decoration: none;
-    transition: 0.2s;
+    letter-spacing: 1px;
+    box-shadow: 0 0 25px rgba(117,64,201,.25);
+    transition: transform .3s, box-shadow .3s, filter .3s;
+    position: relative;
+    overflow: hidden;
 }
 
 .invite-button:hover {
-    background: #925cff;
-    transform: translateY(-2px);
+    transform: translateY(-5px) scale(1.04);
+    box-shadow: 0 8px 35px rgba(146,92,255,.5);
+    filter: brightness(1.15);
 }
+
+.invite-button:active {
+    transform: scale(.96);
+}
+
+.invite-button::after {
+    content: "";
+    position: absolute;
+    top: -50%;
+    left: -100%;
+    width: 50%;
+    height: 200%;
+    background: rgba(255,255,255,.2);
+    transform: rotate(25deg);
+    transition: left .6s;
+}
+
+.invite-button:hover::after {
+    left: 150%;
+}
+
+/* CARDS */
 
 .cards {
     display: flex;
-    gap: 20px;
+    gap: 22px;
     justify-content: center;
-    margin-top: 65px;
+    margin-top: 75px;
     flex-wrap: wrap;
 }
 
 .card {
-    background: #111119;
+    background: var(--panel);
     border: 1px solid #302442;
     border-radius: 14px;
     padding: 30px;
-    width: 260px;
+    width: 280px;
+    transition: .35s;
+}
+
+.card:hover {
+    transform: translateY(-9px);
+    border-color: #8954c5;
+    box-shadow: 0 12px 35px rgba(100,38,173,.17);
 }
 
 .card h2 {
-    color: #b68aff;
+    color: var(--purple-light);
+    margin-bottom: 12px;
 }
 
-a {
+.card a {
     display: inline-block;
-    margin-top: 15px;
-    color: #fff;
+    margin-top: 20px;
+    color: white;
     background: #7540c9;
-    padding: 12px 20px;
+    padding: 12px 22px;
     border-radius: 8px;
     text-decoration: none;
+    transition: .3s;
 }
 
-a:hover {
+.card a:hover {
     background: #925cff;
+    transform: scale(1.06);
 }
+
+/* SCROLL REVEAL */
+
+.reveal {
+    opacity: 0;
+    transform: translateY(35px);
+    transition: opacity .8s ease, transform .8s ease;
+}
+
+.reveal.visible {
+    opacity: 1;
+    transform: translateY(0);
+}
+
+/* FOOTER */
 
 footer {
+    position: relative;
+    z-index: 1;
     text-align: center;
     color: #777;
-    padding: 30px;
+    padding: 35px 20px;
     border-top: 1px solid #24202f;
+    margin-top: 30px;
 }
 
-@media (max-width: 600px) {
-    h1 {
-        font-size: 32px;
-    }
+/* ENTRANCE */
 
-    .bot-image {
-        height: 190px;
+@keyframes fadeUp {
+    from { opacity: 0; transform: translateY(30px); }
+    to { opacity: 1; transform: translateY(0); }
+}
+
+@keyframes slideDown {
+    from { opacity: 0; transform: translateY(-25px); }
+    to { opacity: 1; transform: translateY(0); }
+}
+
+/* MOBILE */
+
+@media (max-width: 600px) {
+    main {
+        padding: 55px 16px;
     }
 
     .bot-section {
-        padding: 20px 15px;
+        padding: 35px 17px;
+    }
+
+    .robot-art {
+        transform: scale(.85);
+        margin-bottom: 20px;
+    }
+
+    .cards {
+        gap: 15px;
+    }
+
+    .card {
+        width: 100%;
+    }
+
+    .cursor-light {
+        display: none;
+    }
+}
+
+/* REDUCED MOTION */
+
+@media (prefers-reduced-motion: reduce) {
+    *, *::before, *::after {
+        animation-duration: .01ms !important;
+        animation-iteration-count: 1 !important;
+        scroll-behavior: auto !important;
+        transition-duration: .01ms !important;
     }
 }
 </style>
 </head>
 
-<body>
+<body class="loading">
+
+<div class="intro" id="intro">
+    <div class="intro-logo">SHEDOWBOT</div>
+    <div class="loader"></div>
+</div>
+
+<div class="background-glow"></div>
+<div id="particles"></div>
+<div class="cursor-light" id="cursorLight"></div>
 
 <header>
-    <div class="logo">SHADOWBYTE STUDIO</div>
+    <div class="logo">SHADOWBYTE <span>STUDIO</span></div>
 </header>
 
 <main>
 
-    <h1>BUILDING <span>DIGITAL</span> FUTURE</h1>
+    <h1 class="hero-title">
+        YOUR SERVER.<br>
+        <span>YOUR SECURITY.</span>
+    </h1>
 
-    <p class="description">
-        Welcome to ShadowByte Studio.
-        We create digital solutions, Discord bots
-        and custom development projects.
+    <p class="description hero-description">
+        Poznaj ShedowBot – rozwiązanie stworzone z myślą
+        o moderacji i ochronie społeczności Discord.
     </p>
 
-    <section class="bot-section">
+    <section class="bot-section reveal">
 
-        <div class="bot-image">
-            <span>SHADOWBYTE</span>
+        <div class="robot-art">
+            <div class="robot-orbit"></div>
+            <div class="robot-core">
+                <div class="robot-antenna"></div>
+                <div class="robot-face">
+                    <div class="robot-eye"></div>
+                    <div class="robot-eye"></div>
+                </div>
+            </div>
         </div>
 
-        <h2>ShadowByte Market</h2>
+        <h2>ShedowBot</h2>
 
         <p class="bot-description">
-            ShadowByte Market to bot Discord stworzony z myślą
-            o moderacji i ochronie serwerów. Pomaga utrzymać
-            porządek i bezpieczeństwo Twojej społeczności.
+            ShedowBot pomaga utrzymać porządek i bezpieczeństwo
+            na Twoim serwerze Discord. Postaw na wygodną moderację
+            i lepszą ochronę swojej społeczności.
         </p>
 
         <div class="features">
-            <div class="feature">Anti-Raid</div>
-            <div class="feature">Anti-Spam</div>
-            <div class="feature">Anti-Bot</div>
             <div class="feature">Moderacja</div>
             <div class="feature">Ochrona serwera</div>
+            <div class="feature">Bezpieczeństwo</div>
         </div>
 
         <a class="invite-button"
            href="https://discord.com/oauth2/authorize?client_id=1573052766413127983&permissions=8&integration_type=0&scope=bot+applications.commands"
            target="_blank"
            rel="noopener noreferrer">
-            DODAJ DO DISCORDA
+            DODAJ SHEDOWBOTA DO DISCORDA
         </a>
 
     </section>
 
     <div class="cards">
 
-        <div class="card">
+        <div class="card reveal">
             <h2>Terms of Service</h2>
             <p class="description">Our terms and conditions.</p>
             <a href="terms.html">Read more</a>
         </div>
 
-        <div class="card">
+        <div class="card reveal">
             <h2>Privacy Policy</h2>
             <p class="description">How we handle your data.</p>
             <a href="privacy.html">Read more</a>
@@ -256,6 +631,56 @@ footer {
 <footer>
     © 2026 ShadowByte Studio. All rights reserved.
 </footer>
+
+<script>
+/* INTRO */
+
+window.addEventListener("load", () => {
+    setTimeout(() => {
+        document.getElementById("intro").classList.add("hide");
+        document.body.classList.remove("loading");
+    }, 1400);
+});
+
+/* PARTICLES */
+
+const particleContainer = document.getElementById("particles");
+
+for (let i = 0; i < 35; i++) {
+    const particle = document.createElement("div");
+    particle.className = "particle";
+    particle.style.left = Math.random() * 100 + "%";
+    particle.style.animationDuration = (8 + Math.random() * 14) + "s";
+    particle.style.animationDelay = (-Math.random() * 15) + "s";
+    particleContainer.appendChild(particle);
+}
+
+/* CURSOR LIGHT */
+
+const cursorLight = document.getElementById("cursorLight");
+
+window.addEventListener("mousemove", (event) => {
+    cursorLight.style.left = event.clientX + "px";
+    cursorLight.style.top = event.clientY + "px";
+});
+
+/* SCROLL REVEAL */
+
+const observer = new IntersectionObserver((entries) => {
+    entries.forEach(entry => {
+        if (entry.isIntersecting) {
+            entry.target.classList.add("visible");
+            observer.unobserve(entry.target);
+        }
+    });
+}, {
+    threshold: 0.12
+});
+
+document.querySelectorAll(".reveal").forEach(element => {
+    observer.observe(element);
+});
+</script>
 
 </body>
 </html>
