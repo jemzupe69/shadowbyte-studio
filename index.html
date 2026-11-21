@@ -5,44 +5,140 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>ShadowByte Studio</title>
+
 <style>
-* { box-sizing: border-box; }
+* {
+    box-sizing: border-box;
+}
+
 body {
     margin: 0;
     background: #08080d;
     color: #fff;
     font-family: Arial, sans-serif;
 }
+
 header {
     padding: 25px;
     text-align: center;
     border-bottom: 1px solid #24202f;
 }
+
 .logo {
     color: #a66cff;
     font-size: 27px;
     font-weight: bold;
     letter-spacing: 3px;
 }
+
 main {
-    max-width: 850px;
-    margin: 100px auto;
+    max-width: 1000px;
+    margin: 65px auto;
     padding: 25px;
     text-align: center;
 }
-h1 { font-size: 42px; }
-h1 span { color: #a66cff; }
+
+h1 {
+    font-size: 42px;
+}
+
+h1 span {
+    color: #a66cff;
+}
+
 .description {
     color: #aaa;
     line-height: 1.7;
 }
+
+.bot-section {
+    margin-top: 65px;
+    padding: 35px 25px;
+    background: #111119;
+    border: 1px solid #302442;
+    border-radius: 18px;
+}
+
+.bot-image {
+    width: 100%;
+    max-width: 650px;
+    height: 280px;
+    margin: 0 auto 30px;
+    border-radius: 14px;
+    background:
+        radial-gradient(ellipse at center, #39205f 0%, #171020 45%, #0b0b11 100%);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    overflow: hidden;
+}
+
+.bot-image img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+.bot-image span {
+    color: #b68aff;
+    font-size: 35px;
+    font-weight: bold;
+    letter-spacing: 3px;
+}
+
+.bot-section h2 {
+    color: #b68aff;
+    font-size: 30px;
+}
+
+.bot-description {
+    max-width: 650px;
+    margin: 15px auto;
+    color: #aaa;
+    line-height: 1.8;
+}
+
+.features {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 12px;
+    margin: 30px 0;
+}
+
+.feature {
+    background: #1b1725;
+    border: 1px solid #38284e;
+    padding: 12px 18px;
+    border-radius: 8px;
+    color: #d5c2f5;
+}
+
+.invite-button {
+    display: inline-block;
+    margin-top: 15px;
+    padding: 16px 32px;
+    border-radius: 9px;
+    background: #7540c9;
+    color: white;
+    font-weight: bold;
+    text-decoration: none;
+    transition: 0.2s;
+}
+
+.invite-button:hover {
+    background: #925cff;
+    transform: translateY(-2px);
+}
+
 .cards {
     display: flex;
     gap: 20px;
     justify-content: center;
-    margin-top: 45px;
+    margin-top: 65px;
     flex-wrap: wrap;
 }
+
 .card {
     background: #111119;
     border: 1px solid #302442;
@@ -50,7 +146,11 @@ h1 span { color: #a66cff; }
     padding: 30px;
     width: 260px;
 }
-.card h2 { color: #b68aff; }
+
+.card h2 {
+    color: #b68aff;
+}
+
 a {
     display: inline-block;
     margin-top: 15px;
@@ -60,15 +160,34 @@ a {
     border-radius: 8px;
     text-decoration: none;
 }
-a:hover { background: #925cff; }
+
+a:hover {
+    background: #925cff;
+}
+
 footer {
     text-align: center;
     color: #777;
     padding: 30px;
     border-top: 1px solid #24202f;
 }
+
+@media (max-width: 600px) {
+    h1 {
+        font-size: 32px;
+    }
+
+    .bot-image {
+        height: 190px;
+    }
+
+    .bot-section {
+        padding: 20px 15px;
+    }
+}
 </style>
 </head>
+
 <body>
 
 <header>
@@ -76,14 +195,48 @@ footer {
 </header>
 
 <main>
+
     <h1>BUILDING <span>DIGITAL</span> FUTURE</h1>
+
     <p class="description">
         Welcome to ShadowByte Studio.
         We create digital solutions, Discord bots
         and custom development projects.
     </p>
 
+    <section class="bot-section">
+
+        <div class="bot-image">
+            <span>SHADOWBYTE</span>
+        </div>
+
+        <h2>ShadowByte Market</h2>
+
+        <p class="bot-description">
+            ShadowByte Market to bot Discord stworzony z myślą
+            o moderacji i ochronie serwerów. Pomaga utrzymać
+            porządek i bezpieczeństwo Twojej społeczności.
+        </p>
+
+        <div class="features">
+            <div class="feature">Anti-Raid</div>
+            <div class="feature">Anti-Spam</div>
+            <div class="feature">Anti-Bot</div>
+            <div class="feature">Moderacja</div>
+            <div class="feature">Ochrona serwera</div>
+        </div>
+
+        <a class="invite-button"
+           href="https://discord.com/oauth2/authorize?client_id=1573052766413127983&permissions=8&integration_type=0&scope=bot+applications.commands"
+           target="_blank"
+           rel="noopener noreferrer">
+            DODAJ DO DISCORDA
+        </a>
+
+    </section>
+
     <div class="cards">
+
         <div class="card">
             <h2>Terms of Service</h2>
             <p class="description">Our terms and conditions.</p>
@@ -95,7 +248,9 @@ footer {
             <p class="description">How we handle your data.</p>
             <a href="privacy.html">Read more</a>
         </div>
+
     </div>
+
 </main>
 
 <footer>
